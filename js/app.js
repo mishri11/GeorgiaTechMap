@@ -98,7 +98,7 @@ function ViewModel() {
     for (let i=self.displayed().length-1; i>=0; i--) { // loop through all the buildings and see which ones match what user has typed in
       // loop backwards through array because we are going to be deleting as we go
       let building = self.displayed()[i];
-      if (building.name.toLowerCase().includes(userText)) { // compare user input with building name, if substring then display that marker
+      if (building.name.toLowerCase().includes(userText.toLowerCase())) { // compare user input with building name, if substring then display that marker
         let marker = new google.maps.Marker({
           position: {lat: parseFloat(building.latitude), lng: parseFloat(building.longitude)},
           map: map,
