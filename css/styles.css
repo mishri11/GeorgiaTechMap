@@ -68,22 +68,17 @@ a {
   color: white;
 }
 
-
-/*screens between 500px and 1210px*/
 @media screen and (min-width: 811px) and (max-width: 1210px) {
   #filter-pane {
     width: 30%;
   }
 }
 
-
-/*screens between 500px and 1210px*/
 @media screen and (min-width: 611px) and (max-width: 810px) {
   #filter-pane {
     width: 40%;
   }
 }
-/*small screens less than 499px*/
 @media screen and (max-width: 610px) {
   #filter-pane {
     width: 70%;
