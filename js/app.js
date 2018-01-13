@@ -73,7 +73,6 @@ function ViewModel() {
   self.resetDisplayed(); // begin with all buildings displayed
 
   self.showInfoWindow = function(buildObj) { // function that gets called when user clicks on place name in menu
-    console.log(buildObj.name);
     for (let marker of markers) {
       if (buildObj.name===marker.title) {
         if (marker.getAnimation() !== null) {
