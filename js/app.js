@@ -1,4 +1,3 @@
-"use strict";
 let buildings;  // array of Georgia Tech building objects we get from Georgia Tech API
 
 /* This is the function called after Google Map API has loaded the map. This function fetches
