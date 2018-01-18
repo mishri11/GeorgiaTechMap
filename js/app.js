@@ -108,13 +108,19 @@ function ViewModel() {
         let infowindow = new google.maps.InfoWindow({
             content: contentString
         });
-        marker.addListener('click', function() {
-          infowindow.open(map, marker);
-        });
+        // marker.addListener('click', function() {
+        //   infowindow.open(map, marker);
+        // });
+        addWindowListener(marker, infowindow);
         markers.push(marker);
       } else { // if user input is not substring of that building name then remove that building from currently displayed buildings
         self.displayed.remove(building);
       }
+    }
+    function addWindowListener(marker, infowindow) {
+      marker.addListener('click', function() {
+        infowindow.open(map, marker);
+      });
     }
   };
 }
