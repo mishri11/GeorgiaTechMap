@@ -14,6 +14,9 @@ function initBuildings() {
     buildings = json;
     initMap(); // Initialize map when buildings array obtained from API
     ko.applyBindings(new ViewModel()); // Activates knockout.js - need to do here because of asynchronous data fetching
+  }).catch(function(error) {
+    alert(`There was a problem getting data from Georgia Tech's API:
+    ${error}`);
   });
 }
 
