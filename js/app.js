@@ -1,5 +1,9 @@
 let buildings;  // array of Georgia Tech building objects we get from Georgia Tech API
 
+function mapError() { // display an alert if something goes wrong with Maps API request
+  alert("Google Maps data failed to load");
+}
+
 /* This is the function called after Google Map API has loaded the map. This function fetches
 data from a 3rd party API (Georgia Tech API) to get an array of objects representing all the buildings
 on the Georgia Tech college campus.*/
