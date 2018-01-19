@@ -55,7 +55,7 @@ function initMap() {
 showing location list is visible and also keeps track of the array containing all the currently displayed buildings. */
 function ViewModel() {
   let self = this;
-
+  self.userText = ko.observable(""); // this is the place name the user searches for
   self.menuShown = ko.observable(false); // initially menu is not shown
   self.toggleMenu = function() { // menu state can get toggled with this
     self.menuShown(!(self.menuShown()));
@@ -88,9 +88,8 @@ function ViewModel() {
     }
   };
 
-  self.update = function() { // function that gets called when user types a name into menu search input to filter places
+  self.update = ko.computed(function() { // function that gets called when user types a name into menu search input to filter places; this is a computed Knockout observable because it depends on the KO observable userText
     self.resetDisplayed(); // start with all places
-    let userText = document.getElementById('search-bar').value;
     for (let marker of markers) {
       marker.setMap(null); // stop displaying all current markers
     }
@@ -98,7 +97,7 @@ function ViewModel() {
     for (let i=self.displayed().length-1; i>=0; i--) { // loop through all the buildings and see which ones match what user has typed in
       // loop backwards through array because we are going to be deleting as we go
       let building = self.displayed()[i];
-      if (building.name.toLowerCase().includes(userText.toLowerCase())) { // compare user input with building name, if substring then display that marker
+      if (building.name.toLowerCase().includes(self.userText().toLowerCase())) { // compare user input with building name, if substring then display that marker
         let marker = new google.maps.Marker({
           position: {lat: parseFloat(building.latitude), lng: parseFloat(building.longitude)},
           map: map,
@@ -122,5 +121,5 @@ function ViewModel() {
         infowindow.open(map, marker);
       });
     }
-  };
+  });
 }
