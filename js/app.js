@@ -27,6 +27,13 @@ function initBuildings() {
 let map;
 let markers = []; // array that will store markers
 
+function addMarkerAnimation(marker) { // This function gets used quite a bit later in the code to add bounce functionality when marker or building name gets clicked
+  marker.setAnimation(google.maps.Animation.BOUNCE);
+  setTimeout(function() {
+    marker.setAnimation(null)
+  }, 2000); // marker stops bouncing after a certain amount of time
+}
+
 /* This function is called after place data from 3rd party API has loaded. This displays the map and all the buildings on the map.
 Also adds info windows and animations for marker click events. */
 function initMap() {
@@ -39,7 +46,6 @@ function initMap() {
     let marker = new google.maps.Marker({
       position: {lat: parseFloat(building.latitude), lng: parseFloat(building.longitude)},
       map: map,
-      animation: google.maps.Animation.DROP,
       title: building.name
     });
     let contentString = `<p>${building.name}</p><p>${building.address}</p><p>${building.phone_num}</p>`; // content for infowindow
@@ -47,11 +53,7 @@ function initMap() {
         content: contentString
     });
     marker.addListener('click', function() { // when you click on a marker it will either bounce or stop bouncing
-      if (marker.getAnimation() !== null) {
-          marker.setAnimation(null);
-        } else {
-          marker.setAnimation(google.maps.Animation.BOUNCE);
-      }
+      addMarkerAnimation(marker);
       infowindow.open(map, marker); // when you click on a marker it's infowindow is also displayed
     });
     markers.push(marker);
@@ -82,11 +84,7 @@ function ViewModel() {
   self.showInfoWindow = function(buildObj) { // function that gets called when user clicks on place name in menu
     for (let marker of markers) {
       if (buildObj.name===marker.title) {
-        if (marker.getAnimation() !== null) {
-            marker.setAnimation(null);
-          } else {
-            marker.setAnimation(google.maps.Animation.BOUNCE);
-        }
+        addMarkerAnimation(marker);
         let infoWindow = new google.maps.InfoWindow({
           content: `<p>${buildObj.name}</p><p>${buildObj.address}</p><p>${buildObj.phone_num}</p>`
         });
@@ -125,6 +123,7 @@ function ViewModel() {
     }
     function addWindowListener(marker, infowindow) {
       marker.addListener('click', function() {
+        addMarkerAnimation(marker);
         infowindow.open(map, marker);
       });
     }
