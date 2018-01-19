@@ -30,7 +30,7 @@ let markers = []; // array that will store markers
 function addMarkerAnimation(marker) { // This function gets used quite a bit later in the code to add bounce functionality when marker or building name gets clicked
   marker.setAnimation(google.maps.Animation.BOUNCE);
   setTimeout(function() {
-    marker.setAnimation(null)
+    marker.setAnimation(null);
   }, 2000); // marker stops bouncing after a certain amount of time
 }
 
